@@ -1,0 +1,289 @@
+ALTER TABLE asigna_plaza
+ADD FOREIGN KEY (plaza_cl)
+REFERENCES plaza(plaza_cl)
+;
+ALTER TABLE asigna_plaza
+ADD
+FOREIGN KEY
+(
+  trimestre_cl,
+  personal_cl
+)
+REFERENCES participante
+(
+  trimestre_cl,
+  personal_cl
+)
+;
+ALTER TABLE aspirante_e
+ADD
+FOREIGN KEY
+(
+  unidad_cl,
+  division_cl
+)
+REFERENCES r_uni_div
+(
+  unidad_cl,
+  division_cl
+)
+;
+ALTER TABLE aspirante_e
+ADD FOREIGN KEY (escuela_cl)
+REFERENCES escuela(escuela_cl)
+;
+ALTER TABLE aspirante_e
+ADD
+FOREIGN KEY
+(
+  clave_plan_cl,
+  tur_ded_cl
+)
+REFERENCES reg_plan_td
+(
+  cve_plan_cl,
+  tur_ded_cl
+)
+;
+ALTER TABLE aspirante_e
+ADD FOREIGN KEY (clave_plan2_cl)
+REFERENCES registro_plan(cve_plan_cl)
+;
+ALTER TABLE aspirante_e
+ADD FOREIGN KEY (documento_e_cl)
+REFERENCES documento_e(documento_e_cl)
+;
+ALTER TABLE aspirante_e
+ADD FOREIGN KEY (escuela_pro_cl)
+REFERENCES escuela_proc(escuela_pro_cl)
+;
+ALTER TABLE aspirante_e
+ADD FOREIGN KEY (documento_n_cl)
+REFERENCES documento_n(documento_n_cl)
+;
+ALTER TABLE aspirante_e
+ADD FOREIGN KEY (id_esc_pro_cl)
+REFERENCES e_procedencia(id_esc_pro_cl)
+;
+ALTER TABLE aspirante_e
+ADD FOREIGN KEY (trimestre_cl)
+REFERENCES trimestre(trimestre_cl)
+;
+ALTER TABLE aspirante_l
+ADD FOREIGN KEY (lug_nacim_cl)
+REFERENCES entidad_fed(entidad_fed_cl)
+;
+ALTER TABLE aspirante_l
+ADD
+FOREIGN KEY
+(
+  lug_res_cl,
+  ciudad_res_cl
+)
+REFERENCES ciudad
+(
+  entidad_fed_cl,
+  ciudad_cl
+)
+;
+ALTER TABLE aspirante_l
+ADD
+FOREIGN KEY
+(
+  lug_res_cl,
+  mun_del_cl
+)
+REFERENCES dmun_ent_fed
+(
+  entidad_fed_cl,
+  mun_del_cl
+)
+;
+ALTER TABLE aspirante_l
+ADD FOREIGN KEY (pais_iso_cl)
+REFERENCES nacionalidad_a(pais_iso_cl)
+;
+ALTER TABLE aspirante_r
+ADD FOREIGN KEY (aspirante_cl)
+REFERENCES aspirante_l(aspirante_cl)
+;
+ALTER TABLE aula_examen
+ADD
+FOREIGN KEY
+(
+  aula_p_nu,
+  plantel_cl
+)
+REFERENCES area_plantel
+(
+  aula_p_nu,
+  plantel_cl
+)
+;
+ALTER TABLE aula_examen
+ADD FOREIGN KEY (turno_p_cl)
+REFERENCES turno_p(turno_p_cl)
+;
+ALTER TABLE aula_examen
+ADD FOREIGN KEY (dia_examen_nu)
+REFERENCES dia_examen(dia_examen_nu)
+;
+ALTER TABLE aula_examen
+ADD FOREIGN KEY (estado_aula_cl)
+REFERENCES estado_aula(estado_aula_cl)
+;
+ALTER TABLE aula_examen
+ADD FOREIGN KEY (bolsa_cl)
+REFERENCES bolsa(bolsa_cl)
+;
+ALTER TABLE ctrl_registro
+ADD FOREIGN KEY (trimestre_cl)
+REFERENCES trimestre(trimestre_cl)
+;
+ALTER TABLE ctrl_registro
+ADD FOREIGN KEY (estado_gfol_cl)
+REFERENCES estado_gfolio(estado_gfol_cl)
+;
+ALTER TABLE ctrl_registro
+ADD FOREIGN KEY (estado_pfis_cl)
+REFERENCES estado_pfisica(estado_pfis_cl)
+;
+ALTER TABLE ctrl_registro
+ADD FOREIGN KEY (estado_gral_cl)
+REFERENCES estado_general(estado_gral_cl)
+;
+ALTER TABLE escuela
+ADD FOREIGN KEY (escuela_pro_cl)
+REFERENCES escuela_proc(escuela_pro_cl)
+;
+ALTER TABLE folio_examen
+ADD FOREIGN KEY (aspirante_cl)
+REFERENCES aspirante_l(aspirante_cl)
+;
+ALTER TABLE folio_examen
+ADD
+FOREIGN KEY
+(
+  tipo_examen_cl,
+  stipo_exa_a_cl
+)
+REFERENCES stipo_examen
+(
+  tipo_examen_cl,
+  stipo_exa_a_cl
+)
+;
+ALTER TABLE folio_examen
+ADD FOREIGN KEY (estado_fex_cl)
+REFERENCES estado_fex(estado_fex_cl)
+;
+ALTER TABLE gafete
+ADD FOREIGN KEY (subproceso_cl)
+REFERENCES subproceso(subproceso_cl)
+;
+ALTER TABLE jornada
+ADD FOREIGN KEY (corte_fe)
+REFERENCES corte_pago(corte_fe)
+;
+ALTER TABLE jornada
+ADD
+FOREIGN KEY
+(
+  trimestre_cl,
+  personal_cl
+)
+REFERENCES participante
+(
+  trimestre_cl,
+  personal_cl
+)
+;
+ALTER TABLE puesto
+ADD FOREIGN KEY (categoria_cl)
+REFERENCES categoria_ra(categoria_cl)
+;
+ALTER TABLE r_uni_div
+ADD FOREIGN KEY (division_cl)
+REFERENCES r_division(division_cl)
+;
+ALTER TABLE r_uni_div
+ADD FOREIGN KEY (unidad_cl)
+REFERENCES r_unidad(unidad_cl)
+;
+ALTER TABLE reg_plan
+ADD FOREIGN KEY (trimestre_cl)
+REFERENCES trimestre(trimestre_cl)
+;
+ALTER TABLE registro_plan
+ADD FOREIGN KEY (estado_plan_cl)
+REFERENCES estado_plan(estado_plan_cl)
+;
+ALTER TABLE registro_plan
+ADD FOREIGN KEY (tipo_examen_cl)
+REFERENCES tipo_examen(tipo_examen_cl)
+;
+ALTER TABLE registro_plan
+ADD
+FOREIGN KEY
+(
+  unidad_cl,
+  division_cl
+)
+REFERENCES r_uni_div
+(
+  unidad_cl,
+  division_cl
+)
+;
+ALTER TABLE turno_ded_r
+ADD FOREIGN KEY (dedicacion_cl)
+REFERENCES dedicacion_r(dedicacion_cl)
+;
+ALTER TABLE turno_ded_r
+ADD FOREIGN KEY (turno_cl)
+REFERENCES turno_reg(turno_cl)
+;
+ALTER TABLE plaza
+ADD FOREIGN KEY (puesto_cl)
+REFERENCES puesto(puesto_cl)
+;
+ALTER TABLE plaza
+ADD FOREIGN KEY
+(
+  aula_p_nu,
+  plantel_cl
+)
+REFERENCES area_plantel
+(
+  aula_p_nu,
+  plantel_cl
+)
+;
+ALTER TABLE participante
+ADD FOREIGN KEY (tipo_p_cl)
+REFERENCES tipo_participa(tipo_p_cl)
+;
+ALTER TABLE reg_plan_td
+ADD FOREIGN KEY (tur_ded_cl)
+REFERENCES turno_ded_r(turno_ded_cl)
+;
+ALTER TABLE e_procedencia
+ADD FOREIGN KEY (inst_pro_cl)
+REFERENCES escuela_proc(escuela_pro_cl)
+;
+ALTER TABLE ciudad
+ADD FOREIGN KEY (entidad_fed_cl)
+REFERENCES entidad_fed(entidad_fed_cl)
+;
+ALTER TABLE dmun_ent_fed
+ADD FOREIGN KEY (entidad_fed_cl)
+REFERENCES entidad_fed(entidad_fed_cl)
+;
+ALTER TABLE bolsa
+ADD FOREIGN KEY (edo_bolsa_cl)
+REFERENCES edo_bolsa(edo_bolsa_cl)
+;
+ALTER TABLE stipo_examen
+ADD FOREIGN KEY (tipo_examen_cl)
+REFERENCES tipo_examen(tipo_examen_cl)
+;

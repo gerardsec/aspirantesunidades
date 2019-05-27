@@ -1,0 +1,1056 @@
+CREATE TABLE area_plantel
+(
+  aula_p_nu INT
+, plantel_cl INT
+, edificio_xx VARCHAR(3)
+, nivel_edif_nu INT
+, u_version CHAR(1)
+, tipo_area_xx CHAR(1)
+, uso_aula_lo BOOLEAN
+, usuario_cl BIGINT
+, actualiza_fe DATETIME
+, cve_aula_cl VARCHAR(7)
+, cupo_sae_nu INT
+, cupo_adm_nu INT
+, area_xx VARCHAR(10)
+, area_de VARCHAR(80)
+)
+;
+CREATE UNIQUE INDEX area_plantelI1 ON area_plantel
+(
+  aula_p_nu,
+  plantel_cl
+)
+;
+CREATE TABLE asigna_plaza
+(
+  trimestre_cl VARCHAR(4)
+, personal_cl BIGINT
+, inicio_p_fe DATETIME
+, u_version CHAR(1)
+, plaza_cl INT
+, usuario_cl BIGINT
+, actualiza_fe DATETIME
+, fin_p_fe DATETIME
+)
+;
+
+CREATE INDEX asigna_plazaI2 ON asigna_plaza(plaza_cl)
+;
+CREATE UNIQUE INDEX asigna_plazaI1 ON asigna_plaza
+(
+  trimestre_cl,
+  personal_cl,
+  inicio_p_fe
+)
+;
+CREATE TABLE aspirante_e
+(
+  aspirante_cl VARCHAR(15)
+, u_version CHAR(1)
+, escuela_pro_cl INT
+, unidad_cl INT
+, division_cl INT
+, clave_plan_cl INT
+, tur_ded_cl INT
+, documento_e_cl INT
+, documento_n_cl INT
+, edad_asp_nu INT
+, ultimo_y_lo BOOLEAN
+, year_f_est_fe DATETIME
+, usuario_cl BIGINT
+, promedio_p_nu DOUBLE
+, actualiza_fe DATETIME
+, clave_plan2_cl INT
+, trimestre_cl VARCHAR(4)
+, id_esc_pro_cl INT
+, escuela_cl VARCHAR(15)
+)
+;
+
+CREATE INDEX aspirante_eI8 ON aspirante_e(trimestre_cl)
+;
+CREATE INDEX aspirante_eI7 ON aspirante_e
+(
+  unidad_cl,
+  division_cl
+)
+;
+CREATE INDEX aspirante_eI6 ON aspirante_e(clave_plan2_cl)
+;
+CREATE INDEX aspirante_eI5 ON aspirante_e
+(
+  clave_plan_cl,
+  tur_ded_cl
+)
+;
+CREATE INDEX aspirante_eI4 ON aspirante_e(id_esc_pro_cl)
+;
+CREATE INDEX aspirante_eI3 ON aspirante_e(escuela_pro_cl)
+;
+CREATE INDEX aspirante_eI2 ON aspirante_e(documento_n_cl)
+;
+CREATE UNIQUE INDEX aspirante_eI1 ON aspirante_e(aspirante_cl)
+;
+
+CREATE TABLE aspirante_l
+(
+  aspirante_cl VARCHAR(15)
+, u_version CHAR(1)
+, sancionado_lo BOOLEAN
+, ape_m_asp_xx VARCHAR(50)
+, aspirante_no VARCHAR(50)
+, ape_p_asp_xx VARCHAR(50)
+, calle_y_num_xx VARCHAR(50)
+, colonia_xx VARCHAR(30)
+, sexo_asp_xx CHAR(1)
+, telefono_xx VARCHAR(15)
+, lada_xx VARCHAR(5)
+, lug_nacim_cl INT
+, lug_res_cl INT
+, ciudad_res_cl INT
+, mun_del_cl INT
+, codigo_pos_xx VARCHAR(5)
+, pais_iso_cl INT
+, usuario_cl BIGINT
+, nacimiento_fe DATETIME
+, actualiza_fe DATETIME
+, correo_ele_xx VARCHAR(80)
+, curp_xx VARCHAR(20)
+, mexicano_xx CHAR(1)
+)
+;
+
+CREATE INDEX aspirante_lI4 ON aspirante_l
+(
+  lug_res_cl,
+  mun_del_cl
+)
+;
+CREATE INDEX aspirante_lI3 ON aspirante_l
+(
+  lug_res_cl,
+  ciudad_res_cl
+)
+;
+CREATE INDEX aspirante_lI2 ON aspirante_l(codigo_pos_xx)
+;
+CREATE UNIQUE INDEX aspirante_lI1 ON aspirante_l(aspirante_cl)
+;
+CREATE INDEX aspirante_lI6 ON aspirante_l(pais_iso_cl)
+;
+CREATE INDEX aspirante_lI5 ON aspirante_l(lug_nacim_cl)
+;
+
+CREATE TABLE aspirante_r
+(
+  referencia_nu BIGINT
+, u_version CHAR(1)
+, aspirante_cl VARCHAR(15)
+, pago_reg_lo BOOLEAN
+, enc_se_c_lo BOOLEAN
+, foto_rec_lo BOOLEAN
+, folio_exa_cl INT
+, usuario_cl BIGINT
+, actualiza_fe DATETIME
+, pago_fe DATETIME
+, enc_co_fe DATETIME
+, foto_rec_fe DATETIME
+, folio_asg_fe DATETIME
+, registro_fe DATETIME
+, archivo_xx VARCHAR(16)
+, serv_foto_xx VARCHAR(25)
+, l_asg_fol_lo BOOLEAN
+, rev_dob_mat_cl INT
+, banco_pago_cl INT
+, edo_v_foto_cl INT
+, edo_v_pago_cl INT
+, cantidad_nu DOUBLE
+, cantidad_p_nu DOUBLE
+, ref_pago_bx_xx VARCHAR(40)
+, ref_pago_ba_xx VARCHAR(40)
+, ref_pago_ss_xx VARCHAR(40)
+, gen_ref_ban_fe DATETIME
+, usuario_rf_cl BIGINT
+, actual_rf_fe DATETIME
+, imp_comp_fe DATETIME
+)
+;
+
+CREATE INDEX aspirante_rI2 ON aspirante_r(ref_pago_bx_xx)
+;
+CREATE UNIQUE INDEX aspirante_rI1 ON aspirante_r(referencia_nu)
+;
+CREATE INDEX aspirante_rI5 ON aspirante_r(aspirante_cl)
+;
+CREATE INDEX aspirante_rI4 ON aspirante_r(ref_pago_ss_xx)
+;
+CREATE INDEX aspirante_rI3 ON aspirante_r(ref_pago_ba_xx)
+;
+CREATE TABLE aula
+(
+  plantel_cl INT
+, nivel_nu INT
+, aula_p_nu INT
+, u_version CHAR(1)
+, cve_aula_cl VARCHAR(7)
+, edificio_xx VARCHAR(2)
+, piso_xx VARCHAR(15)
+, cupo_sae_nu INT
+, cupo_adm_nu INT
+, usuario_cl INT
+, actualiza_fe DATETIME
+)
+;
+
+CREATE UNIQUE INDEX aulaI1 ON aula
+(
+  plantel_cl,
+  nivel_nu,
+  aula_p_nu
+)
+;
+CREATE TABLE aula_examen
+(
+  trimestre_cl VARCHAR(4)
+, aula_p_nu INT
+, plantel_cl INT
+, dia_examen_nu INT
+, turno_p_cl INT
+, u_version CHAR(1)
+, tipo_examen_cl INT
+, estado_aula_cl INT
+, asig_ex_nu INT
+, reg_ex_nu INT
+, usuario_cl BIGINT
+, actualiza_fe DATETIME
+, folio_ini_nu INT
+, folio_fin_nu INT
+, exa_ini_xx VARCHAR(8)
+, exa_fin_xx VARCHAR(8)
+, cincho_nu INT
+, bolsa_cl INT
+, h_resp_imp_fe DATETIME
+, h_resp_rev_fe DATETIME
+, comp_imp_fe DATETIME
+, comp_rev_fe DATETIME
+, lista_imp_fe DATETIME
+, etiq_imp_fe DATETIME
+, c_m_env_pla_nu INT
+, c_m_reg_rec_nu INT
+, salon_u_xx VARCHAR(10)
+)
+;
+
+CREATE INDEX aula_examenI2 ON aula_examen(bolsa_cl)
+;
+CREATE UNIQUE INDEX aula_examenI1 ON aula_examen
+(
+  trimestre_cl,
+  aula_p_nu,
+  plantel_cl,
+  dia_examen_nu,
+  turno_p_cl
+)
+;
+CREATE TABLE corte_pago
+(
+  corte_fe DATETIME
+, u_version CHAR(1)
+, etapa_corte_nu INT
+, monto_corte_nu DOUBLE
+, usuario_cl BIGINT
+, actualiza_fe DATETIME
+)
+;
+
+CREATE UNIQUE INDEX corte_pagoI1 ON corte_pago(corte_fe)
+;
+CREATE TABLE ctrl_registro
+(
+  trimestre_cl VARCHAR(4)
+, u_version CHAR(1)
+, estado_pfis_cl INT
+, estado_gfol_cl INT
+, estado_gral_cl INT
+, usuario_cl BIGINT
+, actualiza_fe DATETIME
+, publicacion_fe DATETIME
+, ult_dia_fir_fe DATETIME
+, inicio_rsp_fe DATETIME
+, fin_rsp_fe DATETIME
+, pub_res_sp_fe DATETIME
+, reg_sol_ini_fe DATETIME
+, reg_sol_fin_fe DATETIME
+, f_rec_foto_fe DATETIME
+, fin_pago_fe DATETIME
+, umbral_pago_nu INT
+, umbral_foto_nu INT
+, matriz_xx VARCHAR(150)
+, enc_c_n_fol_nu INT
+, foto_bloque_nu INT
+, asg_pla_ini_fe DATETIME
+, asg_pla_fin_fe DATETIME
+, rehuso_tri_cl VARCHAR(4)
+, public_2lis_fe DATETIME
+)
+;
+
+CREATE UNIQUE INDEX ctrl_registroI1 ON ctrl_registro(trimestre_cl)
+;
+CREATE TABLE dia_examen
+(
+  dia_examen_nu INT
+, u_version CHAR(1)
+, usuario_cl BIGINT
+, actualiza_fe DATETIME
+, dia_examen_fe DATETIME
+)
+;
+CREATE UNIQUE INDEX dia_examenI1 ON dia_examen(dia_examen_nu)
+;
+CREATE TABLE edificio
+(
+  plantel_cl INT
+, edificio_xx VARCHAR(3)
+, u_version CHAR(1)
+, edificio_lo BOOLEAN
+, usuario_cl BIGINT
+, actualiza_fe DATETIME
+, edificio_de VARCHAR(30)
+)
+;
+
+CREATE UNIQUE INDEX edificioI1 ON edificio
+(
+  plantel_cl,
+  edificio_xx
+)
+;
+CREATE TABLE edificio_examen
+(
+  dia_examen_nu INT
+, turno_p_cl INT
+, plantel_cl INT
+, edificio_cl INT
+, u_version CHAR(1)
+, edecan_cl INT
+, usuario_cl INT
+, actualiza_fe DATETIME
+, edificio_ex_de VARCHAR(50)
+)
+;
+
+CREATE UNIQUE INDEX edificio_examenI1 ON edificio_examen
+(
+  dia_examen_nu,
+  turno_p_cl,
+  plantel_cl,
+  edificio_cl
+)
+;
+CREATE TABLE escuela
+(
+  escuela_cl VARCHAR(15)
+, u_version CHAR(1)
+, escuela_no VARCHAR(150)
+, turno_xx VARCHAR(35)
+, domicilio_xx VARCHAR(150)
+, localidad_xx VARCHAR(150)
+, del_o_mun_xx VARCHAR(150)
+, cod_post_xx VARCHAR(5)
+, telefono_xx VARCHAR(20)
+, director_xx VARCHAR(60)
+, servicio_xx VARCHAR(150)
+, sostenimi_xx VARCHAR(50)
+, entidad_fed_cl INT
+, escuela_pro_cl INT
+, usuario_cl BIGINT
+, actualiza_fe DATETIME
+)
+;
+
+CREATE INDEX escuelaI4 ON escuela(entidad_fed_cl)
+;
+CREATE INDEX escuelaI3 ON escuela(localidad_xx)
+;
+CREATE INDEX escuelaI2 ON escuela(escuela_no)
+;
+CREATE UNIQUE INDEX escuelaI1 ON escuela(escuela_cl)
+;
+CREATE TABLE folio_examen
+(
+  folio_exa_cl INT
+, u_version CHAR(1)
+, tipo_examen_cl INT
+, stipo_exa_a_cl INT
+, estado_fex_cl INT
+, f_cod_h_res_xx VARCHAR(8)
+, examen_xx VARCHAR(8)
+, usuario_cl BIGINT
+, actualiza_fe DATETIME
+, trimestre_cl VARCHAR(4)
+, aula_p_nu INT
+, plantel_cl INT
+, dia_examen_nu INT
+, turno_p_cl INT
+, asiento_ex_nu INT
+, aspirante_cl VARCHAR(15)
+)
+;
+
+CREATE INDEX folio_examenI5 ON folio_examen
+(
+  tipo_examen_cl,
+  stipo_exa_a_cl
+)
+;
+CREATE INDEX folio_examenI4 ON folio_examen(estado_fex_cl)
+;
+CREATE INDEX folio_examenI3 ON folio_examen
+(
+  trimestre_cl,
+  aula_p_nu,
+  plantel_cl,
+  dia_examen_nu,
+  turno_p_cl
+)
+;
+CREATE INDEX folio_examenI2 ON folio_examen(aspirante_cl)
+;
+CREATE UNIQUE INDEX folio_examenI1 ON folio_examen(folio_exa_cl)
+;
+CREATE TABLE gafete
+(
+  cod_acceso_xx VARCHAR(13)
+, u_version CHAR(1)
+, usuario_cl BIGINT
+, actualiza_fe DATETIME
+, trimestre_cl VARCHAR(4)
+, personal_cl BIGINT
+, cancelado_lo BOOLEAN
+, inicio_g_fe DATETIME
+, fin_g_fe DATETIME
+, subproceso_cl INT
+, impreso_lo BOOLEAN
+)
+;
+
+CREATE INDEX gafeteI2 ON gafete
+(
+  trimestre_cl,
+  personal_cl
+)
+;
+CREATE UNIQUE INDEX gafeteI1 ON gafete(cod_acceso_xx)
+;
+CREATE TABLE jornada
+(
+  trimestre_cl VARCHAR(4)
+, personal_cl BIGINT
+, inicio_j_fe DATETIME
+, u_version CHAR(1)
+, usuario_cl BIGINT
+, actualiza_fe DATETIME
+, fin_j_fe DATETIME
+, corte_fe DATETIME
+)
+;
+
+CREATE INDEX jornadaI2 ON jornada(corte_fe)
+;
+CREATE UNIQUE INDEX jornadaI1 ON jornada
+(
+  trimestre_cl,
+  personal_cl,
+  inicio_j_fe
+)
+;
+CREATE TABLE monto_pago
+(
+  categoria_cl INT
+, inicio_m_fe DATETIME
+, u_version CHAR(1)
+, monto_pago_nu DOUBLE
+, usuario_cl BIGINT
+, actualiza_fe DATETIME
+, fin_m_fe DATETIME
+)
+;
+
+CREATE UNIQUE INDEX monto_pagoI1 ON monto_pago
+(
+  categoria_cl,
+  inicio_m_fe
+)
+;
+CREATE TABLE personal
+(
+  personal_cl BIGINT
+, u_version CHAR(1)
+, foto_lo BOOLEAN
+, usuario_cl BIGINT
+, actualiza_fe DATETIME
+, nacimiento_fe DATETIME
+, personal_no VARCHAR(50)
+, ape_pat_xx VARCHAR(50)
+, ape_mat_xx VARCHAR(50)
+, personal_m_no VARCHAR(50)
+, ape_pat_m_xx VARCHAR(50)
+, ape_mat_m_xx VARCHAR(50)
+, contable_nu INT
+, matricula_cl BIGINT
+, empleado_cl INT
+, unidad_cl INT
+, codigo_pos_xx VARCHAR(5)
+, calle_y_num_xx VARCHAR(50)
+, colonia_xx VARCHAR(50)
+, curp_xx VARCHAR(18)
+, rfc_xx VARCHAR(15)
+, tel_part_xx VARCHAR(15)
+, tel_cel_xx VARCHAR(15)
+, tel_otro_xx VARCHAR(15)
+, e_mail_xx VARCHAR(80)
+, profesion_xx VARCHAR(50)
+, grado_esc_xx VARCHAR(15)
+, foto_xx VARCHAR(16)
+, sexo_xx CHAR(1)
+)
+;
+
+CREATE UNIQUE INDEX personalI1 ON personal(personal_cl)
+;
+CREATE TABLE puesto
+(
+  puesto_cl INT
+, u_version CHAR(1)
+, usuario_cl BIGINT
+, actualiza_fe DATETIME
+, puesto_xx VARCHAR(80)
+, categoria_cl INT
+)
+;
+
+CREATE INDEX puestoI2 ON puesto(categoria_cl)
+;
+CREATE UNIQUE INDEX puestoI1 ON puesto(puesto_cl)
+;
+CREATE TABLE r_division
+(
+  division_cl INT
+, u_version CHAR(1)
+, division_xx VARCHAR(3)
+, usuario_cl BIGINT
+, actualiza_fe DATETIME
+, division_de VARCHAR(40)
+)
+;
+
+CREATE UNIQUE INDEX r_divisionI1 ON r_division(division_cl)
+;
+CREATE TABLE r_uni_div
+(
+  unidad_cl INT
+, division_cl INT
+, u_version CHAR(1)
+, usuario_cl BIGINT
+, actualiza_fe DATETIME
+)
+;
+
+CREATE UNIQUE INDEX r_uni_divI1 ON r_uni_div
+(
+  unidad_cl,
+  division_cl
+)
+;
+CREATE TABLE r_unidad
+(
+  unidad_cl INT
+, u_version CHAR(1)
+, unidad_1_xx CHAR(1)
+, unidad_xx VARCHAR(3)
+, usuario_cl BIGINT
+, actualiza_fe DATETIME
+, unidad_de VARCHAR(20)
+)
+;
+
+CREATE UNIQUE INDEX r_unidadI1 ON r_unidad(unidad_cl)
+;
+CREATE TABLE reg_plan
+(
+  trimestre_cl VARCHAR(4)
+, clave_plan_cl INT
+, u_version CHAR(1)
+, registros_nu INT
+, usuario_cl BIGINT
+, actualiza_fe DATETIME
+)
+;
+
+CREATE UNIQUE INDEX reg_planI1 ON reg_plan
+(
+  trimestre_cl,
+  clave_plan_cl
+)
+;
+CREATE TABLE registro_plan
+(
+  cve_plan_cl INT
+, u_version CHAR(1)
+, activo_lo BOOLEAN
+, segunda_op_lo BOOLEAN
+, acep_seg_op_lo BOOLEAN
+, estado_plan_cl INT
+, unidad_cl INT
+, division_cl INT
+, tipo_examen_cl INT
+, usuario_cl BIGINT
+, actualiza_fe DATETIME
+, cve_plan_xx VARCHAR(40)
+, cve_plan_de VARCHAR(80)
+, plan_seg_op_cl INT
+)
+;
+
+CREATE INDEX registro_planI3 ON registro_plan(tipo_examen_cl)
+;
+CREATE INDEX registro_planI2 ON registro_plan
+(
+  unidad_cl,
+  division_cl
+)
+;
+CREATE UNIQUE INDEX registro_planI1 ON registro_plan(cve_plan_cl)
+;
+CREATE TABLE tipo_examen
+(
+  tipo_examen_cl INT
+, u_version CHAR(1)
+, dia_examen_nu INT
+, t_stipo_exa_nu INT
+, i_stipo_exa_nu INT
+, s_stipo_exa_nu INT
+, tipo_examen_xx VARCHAR(2)
+, t_examen_nu INT
+, fol_ini_te_nu INT
+, usuario_cl BIGINT
+, actualiza_fe DATETIME
+, examen_fe DATETIME
+, tipo_examen_de VARCHAR(50)
+)
+;
+
+CREATE UNIQUE INDEX tipo_examenI1 ON tipo_examen(tipo_examen_cl)
+;
+CREATE TABLE trimestre
+(
+  trimestre_cl VARCHAR(4)
+, u_version CHAR(1)
+, trimestre_xx VARCHAR(3)
+, admision_lo BOOLEAN
+, usuario_cl BIGINT
+, inicio_trim_fe DATETIME
+, fin_trim_fe DATETIME
+, ini_ev_glo_fe DATETIME
+, fin_ev_glo_fe DATETIME
+, actualiza_fe DATETIME
+)
+;
+
+CREATE UNIQUE INDEX trimestreI1 ON trimestre(trimestre_cl)
+;
+CREATE TABLE turno_ded_r
+(
+  turno_ded_cl INT
+, u_version CHAR(1)
+, turno_cl INT
+, dedicacion_cl INT
+, usuario_cl BIGINT
+, actualiza_fe DATETIME
+, tur_ded_xx VARCHAR(10)
+, tur_ded_de VARCHAR(30)
+)
+;
+
+CREATE UNIQUE INDEX turno_ded_rI1 ON turno_ded_r(turno_ded_cl)
+;
+CREATE TABLE plaza
+(
+  plaza_cl INT
+, u_version CHAR(1)
+, puesto_cl INT
+, aula_p_nu INT
+, plantel_cl INT
+, usuario_cl BIGINT
+, actualiza_fe DATETIME
+)
+;
+
+CREATE INDEX plazaI3 ON plaza(puesto_cl)
+;
+CREATE INDEX plazaI2 ON plaza
+(
+  aula_p_nu,
+  plantel_cl
+)
+;
+CREATE UNIQUE INDEX plazaI1 ON plaza(plaza_cl)
+;
+
+#SEGUNDA PARTE
+
+CREATE TABLE participante
+(
+  trimestre_cl VARCHAR(4)
+, personal_cl BIGINT
+, u_version CHAR(1)
+, tipo_p_cl INT
+, bloqueado_lo BOOLEAN
+, usuario_cl BIGINT
+, actualiza_fe DATETIME
+)
+;
+
+CREATE UNIQUE INDEX participanteI1 ON participante
+(
+  trimestre_cl,
+  personal_cl
+)
+;
+CREATE TABLE reg_plan_td
+(
+  cve_plan_cl INT
+, tur_ded_cl INT
+, u_version CHAR(1)
+, activo_lo BOOLEAN
+, usuario_cl BIGINT
+, actualiza_fe DATETIME
+)
+;
+
+CREATE UNIQUE INDEX reg_plan_tdI1 ON reg_plan_td
+(
+  cve_plan_cl,
+  tur_ded_cl
+)
+;
+CREATE TABLE documento_e
+(
+  documento_e_cl INT
+, u_version CHAR(1)
+, usuario_cl BIGINT
+, actualiza_fe DATETIME
+, documento_e_de VARCHAR(80)
+)
+;
+
+CREATE UNIQUE INDEX documento_eI1 ON documento_e(documento_e_cl)
+;
+CREATE TABLE escuela_proc
+(
+  escuela_pro_cl INT
+, u_version CHAR(1)
+, usuario_cl BIGINT
+, actualiza_fe DATETIME
+, escuela_pro_de VARCHAR(80)
+)
+;
+
+CREATE UNIQUE INDEX escuela_procI1 ON escuela_proc(escuela_pro_cl)
+;
+CREATE TABLE documento_n
+(
+  documento_n_cl INT
+, u_version CHAR(1)
+, usuario_cl BIGINT
+, actualiza_fe DATETIME
+, documento_n_de VARCHAR(80)
+)
+;
+
+CREATE UNIQUE INDEX documento_nI1 ON documento_n(documento_n_cl)
+;
+CREATE TABLE e_procedencia
+(
+  id_esc_pro_cl INT
+, u_version CHAR(1)
+, inst_pro_cl INT
+, usuario_cl BIGINT
+, actualiza_fe DATETIME
+, escuela_p_no VARCHAR(120)
+, numero_e_p_xx VARCHAR(10)
+, clave_e_p_xx VARCHAR(10)
+, ubicacion_xx VARCHAR(60)
+)
+;
+
+CREATE INDEX e_procedenciaI2 ON e_procedencia(inst_pro_cl)
+;
+CREATE UNIQUE INDEX e_procedenciaI1 ON e_procedencia(id_esc_pro_cl)
+;
+CREATE TABLE entidad_fed
+(
+  entidad_fed_cl INT
+, u_version CHAR(1)
+, usuario_cl BIGINT
+, actualiza_fe DATETIME
+, entidad_fed_xx VARCHAR(6)
+, entidad_fed_de VARCHAR(80)
+, ent_fed_xx VARCHAR(5)
+)
+;
+
+CREATE UNIQUE INDEX entidad_fedI1 ON entidad_fed(entidad_fed_cl)
+;
+CREATE TABLE ciudad
+(
+  entidad_fed_cl INT
+, ciudad_cl INT
+, u_version CHAR(1)
+, usuario_cl BIGINT
+, actualiza_fe DATETIME
+, ciudad_de VARCHAR(40)
+)
+;
+
+CREATE UNIQUE INDEX ciudadI1 ON ciudad
+(
+  entidad_fed_cl,
+  ciudad_cl
+)
+;
+CREATE TABLE dmun_ent_fed
+(
+  entidad_fed_cl INT
+, mun_del_cl INT
+, u_version CHAR(1)
+, usuario_cl BIGINT
+, actualiza_fe DATETIME
+, mun_del_de VARCHAR(80)
+)
+;
+
+CREATE UNIQUE INDEX dmun_ent_fedI1 ON dmun_ent_fed
+(
+  entidad_fed_cl,
+  mun_del_cl
+)
+;
+CREATE TABLE nacionalidad_a
+(
+  pais_iso_cl INT
+, u_version CHAR(1)
+, pais_iso_2_xx VARCHAR(2)
+, pais_iso_3_xx VARCHAR(3)
+, usuario_cl BIGINT
+, actualiza_fe DATETIME
+, pais_iso_de VARCHAR(80)
+)
+;
+
+CREATE UNIQUE INDEX nacionalidad_aI1 ON nacionalidad_a(pais_iso_cl)
+;
+CREATE TABLE turno_p
+(
+  turno_p_cl INT
+, u_version CHAR(1)
+, usuario_cl BIGINT
+, hora_i_fe DATETIME
+, hora_f_fe DATETIME
+, actualiza_fe DATETIME
+, turno_p_de VARCHAR(30)
+)
+;
+
+CREATE UNIQUE INDEX turno_pI1 ON turno_p(turno_p_cl)
+;
+CREATE TABLE estado_aula
+(
+  estado_aula_cl INT
+, u_version CHAR(1)
+, usuario_cl BIGINT
+, actualiza_fe DATETIME
+, estado_aula_xx VARCHAR(15)
+, estado_aula_de VARCHAR(50)
+)
+;
+
+CREATE UNIQUE INDEX estado_aulaI1 ON estado_aula(estado_aula_cl)
+;
+CREATE TABLE bolsa
+(
+  bolsa_cl INT
+, u_version CHAR(1)
+, capacidad_nu INT
+, edo_bolsa_cl INT
+, usuario_cl BIGINT
+, actualiza_fe DATETIME
+, bolsa_de VARCHAR(30)
+)
+;
+
+CREATE UNIQUE INDEX bolsaI1 ON bolsa(bolsa_cl)
+;
+CREATE TABLE estado_gfolio
+(
+  estado_gfol_cl INT
+, u_version CHAR(1)
+, usuario_cl BIGINT
+, actualiza_fe DATETIME
+, estado_gfol_de VARCHAR(80)
+)
+;
+
+CREATE UNIQUE INDEX estado_gfolioI1 ON estado_gfolio(estado_gfol_cl)
+;
+CREATE TABLE estado_pfisica
+(
+  estado_pfis_cl INT
+, u_version CHAR(1)
+, usuario_cl BIGINT
+, actualiza_fe DATETIME
+, estado_pfis_de VARCHAR(80)
+)
+;
+
+CREATE UNIQUE INDEX estado_pfisicaI1 ON estado_pfisica(estado_pfis_cl)
+;
+CREATE TABLE estado_general
+(
+  estado_gral_cl INT
+, u_version CHAR(1)
+, usuario_cl BIGINT
+, actualiza_fe DATETIME
+, estado_gral_de VARCHAR(80)
+)
+;
+
+CREATE UNIQUE INDEX estado_generalI1 ON estado_general(estado_gral_cl)
+;
+CREATE TABLE stipo_examen
+(
+  tipo_examen_cl INT
+, stipo_exa_a_cl INT
+, u_version CHAR(1)
+, st_examen_nu INT
+, fol_ini_ex_nu INT
+, fol_ist_exa_cl INT
+, fol_fst_exa_cl INT
+, fol_s_asig_nu INT
+, stipo_ini_nu INT
+, stipo_fin_nu INT
+, usuario_cl BIGINT
+, fol_cs_asig_xx VARCHAR(8)
+, actualiza_fe DATETIME
+)
+;
+
+CREATE UNIQUE INDEX stipo_examenI1 ON stipo_examen
+(
+  tipo_examen_cl,
+  stipo_exa_a_cl
+)
+;
+CREATE TABLE estado_fex
+(
+  estado_fex_cl INT
+, u_version CHAR(1)
+, usuario_cl BIGINT
+, actualiza_fe DATETIME
+, estado_fex_xx VARCHAR(10)
+, estado_fex_de VARCHAR(40)
+)
+;
+
+CREATE UNIQUE INDEX estado_fexI1 ON estado_fex(estado_fex_cl)
+;
+CREATE TABLE subproceso
+(
+  subproceso_cl INT
+, u_version CHAR(1)
+, usuario_cl BIGINT
+, actualiza_fe DATETIME
+, subproceso_xx VARCHAR(80)
+)
+;
+
+CREATE UNIQUE INDEX subprocesoI1 ON subproceso(subproceso_cl)
+;
+CREATE TABLE estado_plan
+(
+  estado_plan_cl INT
+, u_version CHAR(1)
+, estado_plan_xx VARCHAR(10)
+, usuario_cl BIGINT
+, actualiza_fe DATETIME
+, estado_plan_de VARCHAR(20)
+)
+;
+
+CREATE UNIQUE INDEX estado_planI1 ON estado_plan(estado_plan_cl)
+;
+CREATE TABLE dedicacion_r
+(
+  dedicacion_cl INT
+, u_version CHAR(1)
+, dedicacion_xx VARCHAR(5)
+, usuario_cl BIGINT
+, actualiza_fe DATETIME
+, dedicacion_de VARCHAR(20)
+)
+;
+
+CREATE UNIQUE INDEX dedicacion_rI1 ON dedicacion_r(dedicacion_cl)
+;
+CREATE TABLE turno_reg
+(
+  turno_cl INT
+, u_version CHAR(1)
+, turno_xx VARCHAR(5)
+, usuario_cl BIGINT
+, actualiza_fe DATETIME
+, turno_de VARCHAR(10)
+)
+;
+
+CREATE UNIQUE INDEX turno_regI1 ON turno_reg(turno_cl)
+;
+CREATE TABLE tipo_participa
+(
+  tipo_p_cl INT
+, u_version CHAR(1)
+, usuario_cl BIGINT
+, actualiza_fe DATETIME
+, tipo_p_de VARCHAR(30)
+)
+;
+
+CREATE UNIQUE INDEX tipo_participaI1 ON tipo_participa(tipo_p_cl)
+;
+CREATE TABLE edo_bolsa
+(
+  edo_bolsa_cl INT
+, u_version CHAR(1)
+, usuario_cl BIGINT
+, actualiza_fe DATETIME
+, edo_bolsa_de VARCHAR(30)
+)
+;
+
+CREATE UNIQUE INDEX edo_bolsaI1 ON edo_bolsa(edo_bolsa_cl)
+;
+CREATE TABLE categoria_ra
+(
+  categoria_cl INT
+, u_version CHAR(1)
+, recibe_pago_lo BOOLEAN
+, usuario_cl BIGINT
+, actualiza_fe DATETIME
+, categoria_xx VARCHAR(40)
+)
+;
+
+CREATE UNIQUE INDEX categoria_raI1 ON categoria_ra(categoria_cl)
+;
